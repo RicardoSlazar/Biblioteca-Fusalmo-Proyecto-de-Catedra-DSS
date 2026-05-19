@@ -1,0 +1,44 @@
+Options -Indexes
+
+# ── Reescritura de URLs ──────────────────────────────────────
+RewriteEngine On
+
+# Redirigir todo al front controller (index.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# ── Bloquear acceso a directorios sensibles ──────────────────
+RedirectMatch 403 ^/config/.*$
+RedirectMatch 403 ^/models/.*$
+RedirectMatch 403 ^/controllers/.*$
+RedirectMatch 403 ^/views/.*$
+RedirectMatch 403 ^/.github/.*$
+
+# ── Headers de seguridad ─────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options  "nosniff"
+    Header always set X-Frame-Options         "DENY"
+    Header always set X-XSS-Protection        "1; mode=block"
+    Header always set Referrer-Policy         "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── Proteger archivos sensibles ──────────────────────────────
+<FilesMatch "\.(sql|env|log|sh|yml|yaml|json|lock|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ── Habilitar compresión GZIP ────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript
+</IfModule>
+
+# ── Cache de recursos estáticos ──────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css             "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/png            "access plus 1 month"
+    ExpiresByType image/jpeg           "access plus 1 month"
+</IfModule>
