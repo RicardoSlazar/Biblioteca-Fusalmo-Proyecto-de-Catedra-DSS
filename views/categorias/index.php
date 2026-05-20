@@ -39,6 +39,21 @@ $_SESSION['success']
 <?php endif; ?>
 
 
+<?php if(!empty($_SESSION['error'])): ?>
+
+<div class="alert alert-danger">
+
+<?= Security::escape(
+$_SESSION['error']
+) ?>
+
+</div>
+
+<?php unset($_SESSION['error']); ?>
+
+<?php endif; ?>
+
+
 <!-- TABLA -->
 
 <table>
