@@ -92,7 +92,7 @@
 
     <!-- HERO / LOGO -->
     <div class="dashboard-hero">
-        <img src="/BibliotecaMVC/assets/images/banner-fusalmo.png" alt="Logo Fusalmo">
+        <img src="assets/images/banner-fusalmo.png" alt="Logo Fusalmo">
         <p class="dashboard-welcome">Sistema de Gestión de Biblioteca</p>
     </div>
 

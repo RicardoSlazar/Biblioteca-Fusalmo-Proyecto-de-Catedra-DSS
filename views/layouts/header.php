@@ -10,7 +10,7 @@ content="width=device-width, initial-scale=1">
 <title>Biblioteca Fusalmo</title>
 
 <link rel="stylesheet"
-href="/BibliotecaMVC/assets/css/estilos.css">
+href="assets/css/estilos.css">
 
 </head>
 
