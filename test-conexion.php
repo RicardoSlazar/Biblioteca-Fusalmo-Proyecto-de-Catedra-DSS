@@ -26,14 +26,31 @@ if (extension_loaded('pdo_mysql')) {
 // Prueba 3: Intentar conectar
 echo "<p><strong>3. Conexión a MySQL:</strong><br>";
 
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'biblioteca_fusalmo';
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: '';
+$db = getenv('DB_NAME') ?: 'biblioteca_fusalmo';
+$port = (int) (getenv('DB_PORT') ?: 3306);
 $charset = 'utf8mb4';
 
+$databaseUrl = getenv('DATABASE_URL');
+if ($databaseUrl) {
+    $parsedUrl = parse_url($databaseUrl);
+
+    if ($parsedUrl !== false) {
+        $host = $parsedUrl['host'] ?? $host;
+        $user = $parsedUrl['user'] ?? $user;
+        $pass = $parsedUrl['pass'] ?? $pass;
+        $port = isset($parsedUrl['port']) ? (int) $parsedUrl['port'] : $port;
+
+        if (!empty($parsedUrl['path'])) {
+            $db = ltrim($parsedUrl['path'], '/');
+        }
+    }
+}
+
 try {
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
