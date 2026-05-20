@@ -199,16 +199,12 @@ case 'libros':
 
 break;
 
-
-// ── CATEGORÍAS ───────────────────────────────────────────────
-
 // ── CATEGORÍAS ───────────────────────────────────────────────
 
 case 'categorias':
 
     Session::requireRole([
-        'admin',
-        'bibliotecario'
+        'admin'
     ]);
 
     require_once __DIR__ .
@@ -262,9 +258,39 @@ case 'autores':
     require_once __DIR__ .
     '/controllers/AutorController.php';
 
-    $ctrl=new AutorController();
+    $ctrl = new AutorController();
 
-    $ctrl->index();
+    if($_SERVER['REQUEST_METHOD']==='POST'){
+
+        match($action){
+
+            'process-create'
+                => $ctrl->processCreate(),
+
+            'process-edit'
+                => $ctrl->processEdit(),
+
+            'delete'
+                => $ctrl->delete(),
+
+            default
+                => $ctrl->index()
+        };
+
+    }else{
+
+        match($action){
+
+            'create'
+                => $ctrl->showCreate(),
+
+            'edit'
+                => $ctrl->showEdit(),
+
+            default
+                => $ctrl->index()
+        };
+    }
 
 break;
 
@@ -326,15 +352,127 @@ break;
 case 'usuarios':
 
     Session::requireRole([
-        'admin'
+        'admin',
+        'bibliotecario'
     ]);
 
     require_once __DIR__ .
     '/controllers/UsuarioController.php';
 
-    $ctrl=new UsuarioController();
+    $ctrl = new UsuarioController();
 
-    $ctrl->index();
+    if($_SERVER['REQUEST_METHOD']==='POST'){
+
+        match($action){
+
+            'process-edit'
+                => $ctrl->processEdit(),
+
+            'delete'
+                => $ctrl->delete(),
+
+            'process-change-password'
+                => $ctrl->processChangePassword(),
+
+            'toggle-status'
+                => $ctrl->toggleStatus(),
+
+            default
+                => $ctrl->index()
+        };
+
+    }else{
+
+        match($action){
+
+            'edit'
+                => $ctrl->showEdit(),
+
+            'change-password'
+                => $ctrl->showChangePassword(),
+
+            default
+                => $ctrl->index()
+        };
+
+    }
+
+break;
+
+
+// ── CATÁLOGO DE LIBROS (USUARIO) ─────────────────────────────
+
+case 'catalogo-libros':
+
+    Session::requireLogin();
+
+    require_once __DIR__ .
+    '/controllers/LibroController.php';
+
+    $ctrl = new LibroController();
+
+    if (
+        $_SERVER['REQUEST_METHOD'] === 'POST'
+        && $action === 'calificar'
+    ) {
+        $ctrl->calificar();
+    } else {
+        $ctrl->catalogo();
+    }
+
+break;
+
+
+// ── MIS PRÉSTAMOS (USUARIO) ──────────────────────────────────
+
+case 'mis-prestamos':
+
+    Session::requireLogin();
+
+    require_once __DIR__ .
+    '/controllers/PrestamoController.php';
+
+    $ctrl = new PrestamoController();
+
+    if (
+        $_SERVER['REQUEST_METHOD'] === 'POST'
+        && $action === 'calificar'
+    ) {
+        $ctrl->calificarLibro();
+    } else {
+        $ctrl->misPrestamos();
+    }
+
+break;
+
+
+// ── REPORTES (solo admin) ─────────────────────────────────────
+
+case 'reportes':
+
+    Session::requireRole(['admin']);
+
+    require_once __DIR__ .
+    '/controllers/ReporteController.php';
+
+    $ctrl = new ReporteController();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        match($action) {
+            'guardar' => $ctrl->guardar(),
+            default   => $ctrl->index()
+        };
+
+    } else {
+
+        match($action) {
+            'ver'      => $ctrl->ver(),
+            'exportar' => $ctrl->exportar(),
+            default    => $ctrl->index()
+        };
+
+    }
 
 break;
 

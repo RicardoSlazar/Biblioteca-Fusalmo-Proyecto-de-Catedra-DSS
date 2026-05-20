@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (empty($_SESSION['logged_in'])) {
+    header('Location: ../index.php?page=login');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 

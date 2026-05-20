@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (empty($_SESSION['logged_in'])) {
+    header('Location: ../index.php?page=login');
+    exit();
+}
 include("../config/conexion.php");
 
 $sql = "SELECT * FROM libros";
