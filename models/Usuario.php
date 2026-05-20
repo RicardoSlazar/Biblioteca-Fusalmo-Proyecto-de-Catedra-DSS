@@ -19,16 +19,22 @@ class Usuario {
      * Uso de Prepared Statement para evitar SQL Injection.
      */
     public function findByCredential(string $credential): array|false {
-        $stmt = $this->db->prepare(
-            "SELECT id, nombre, correo, contrasena, rol, estado
-             FROM usuarios
-             WHERE (correo = :credential OR nombre = :credential)
-               AND estado = 'activo'
-             LIMIT 1"
-        );
-        $stmt->execute([':credential' => $credential]);
-        return $stmt->fetch();
-    }
+
+    $stmt = $this->db->prepare(
+        "SELECT id, nombre, correo, contrasena, rol, estado
+         FROM usuarios
+         WHERE (correo = :correo OR nombre = :nombre)
+         AND estado = 'activo'
+         LIMIT 1"
+    );
+
+    $stmt->execute([
+        ':correo' => $credential,
+        ':nombre' => $credential
+    ]);
+
+    return $stmt->fetch();
+}
 
     /**
      * Registra un nuevo usuario.

@@ -22,7 +22,7 @@
                         <?php unset($_SESSION['prest_errors']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="/index.php?page=prestamos&action=process-create">
+                    <form method="POST" action="index.php?page=prestamos&action=process-create">
                         <?= Security::csrfField() ?>
                         <div class="mb-3">
                             <label for="usuario_id" class="form-label">Usuario</label>
@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=prestamos" class="btn btn-secondary">Cancelar</a>
+                            <a href="index.php?page=prestamos" class="btn btn-secondary">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Registrar Préstamo</button>
                         </div>
                     </form>

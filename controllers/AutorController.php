@@ -44,16 +44,16 @@ class AutorController {
         if (!empty($errors)) {
             $_SESSION['aut_errors'] = $errors;
             $_SESSION['aut_data'] = compact('nombre', 'nacionalidad');
-            header('Location: /index.php?page=autores&action=create');
+            header('Location: index.php?page=autores&action=create');
             exit();
         }
 
         if ($this->autorModel->create(compact('nombre', 'nacionalidad'))) {
             $_SESSION['success'] = 'Autor creado.';
-            header('Location: /index.php?page=autores');
+            header('Location: index.php?page=autores');
         } else {
             $_SESSION['error'] = 'Error al crear autor.';
-            header('Location: /index.php?page=autores&action=create');
+            header('Location: index.php?page=autores&action=create');
         }
         exit();
     }
@@ -66,7 +66,7 @@ class AutorController {
         
         if (!$autor) {
             $_SESSION['error'] = 'Autor no encontrado.';
-            header('Location: /index.php?page=autores');
+            header('Location: index.php?page=autores');
             exit();
         }
 
@@ -88,16 +88,16 @@ class AutorController {
 
         if (!empty($errors)) {
             $_SESSION['aut_errors'] = $errors;
-            header("Location: /index.php?page=autores&action=edit&id={$id}");
+            header("Location: index.php?page=autores&action=edit&id={$id}");
             exit();
         }
 
         if ($this->autorModel->update($id, compact('nombre', 'nacionalidad'))) {
             $_SESSION['success'] = 'Autor actualizado.';
-            header('Location: /index.php?page=autores');
+            header('Location: index.php?page=autores');
         } else {
             $_SESSION['error'] = 'Error al actualizar.';
-            header("Location: /index.php?page=autores&action=edit&id={$id}");
+            header("Location: index.php?page=autores&action=edit&id={$id}");
         }
         exit();
     }
@@ -120,7 +120,7 @@ class AutorController {
             }
         }
 
-        header('Location: /index.php?page=autores');
+        header('Location: index.php?page=autores');
         exit();
     }
 }

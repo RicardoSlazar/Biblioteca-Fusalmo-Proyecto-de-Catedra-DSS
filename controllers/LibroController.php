@@ -63,7 +63,7 @@ class LibroController {
         if (!empty($errors)) {
             $_SESSION['libro_errors'] = $errors;
             $_SESSION['libro_data'] = compact('titulo', 'autorId', 'categoriaId', 'isbn', 'cantidad', 'descripcion');
-            header('Location: /index.php?page=libros&action=create');
+            header('Location: index.php?page=libros&action=create');
             exit();
         }
 
@@ -78,10 +78,10 @@ class LibroController {
 
         if ($created) {
             $_SESSION['success'] = 'Libro agregado exitosamente.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
         } else {
             $_SESSION['error'] = 'Error al crear el libro.';
-            header('Location: /index.php?page=libros&action=create');
+            header('Location: index.php?page=libros&action=create');
         }
         exit();
     }
@@ -94,14 +94,14 @@ class LibroController {
         $id = Security::sanitizeInt($_GET['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Libro no especificado.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
             exit();
         }
 
         $libro = $this->libroModel->getById($id);
         if (!$libro) {
             $_SESSION['error'] = 'Libro no encontrado.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
             exit();
         }
 
@@ -135,7 +135,7 @@ class LibroController {
 
         if (!empty($errors)) {
             $_SESSION['libro_errors'] = $errors;
-            header("Location: /index.php?page=libros&action=edit&id={$id}");
+            header("Location: index.php?page=libros&action=edit&id={$id}");
             exit();
         }
 
@@ -151,10 +151,10 @@ class LibroController {
 
         if ($updated) {
             $_SESSION['success'] = 'Libro actualizado correctamente.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
         } else {
             $_SESSION['error'] = 'Error al actualizar el libro.';
-            header("Location: /index.php?page=libros&action=edit&id={$id}");
+            header("Location: index.php?page=libros&action=edit&id={$id}");
         }
         exit();
     }
@@ -168,14 +168,14 @@ class LibroController {
         $id = Security::sanitizeInt($_POST['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Libro no especificado.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
             exit();
         }
 
         $libro = $this->libroModel->getById($id);
         if (!$libro) {
             $_SESSION['error'] = 'Libro no encontrado.';
-            header('Location: /index.php?page=libros');
+            header('Location: index.php?page=libros');
             exit();
         }
 
@@ -187,7 +187,7 @@ class LibroController {
             $_SESSION['error'] = 'Error al eliminar el libro.';
         }
 
-        header('Location: /index.php?page=libros');
+        header('Location: index.php?page=libros');
         exit();
     }
 

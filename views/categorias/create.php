@@ -22,7 +22,7 @@
                         <?php unset($_SESSION['cat_errors']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="/index.php?page=categorias&action=process-create">
+                    <form method="POST" action="index.php?page=categorias&action=process-create">
                         <?= Security::csrfField() ?>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
@@ -33,7 +33,7 @@
                             <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=categorias" class="btn btn-secondary">Cancelar</a>
+                            <a href="index.php?page=categorias" class="btn btn-secondary">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>

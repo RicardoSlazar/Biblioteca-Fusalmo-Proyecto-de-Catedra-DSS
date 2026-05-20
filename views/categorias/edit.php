@@ -22,7 +22,7 @@
                         <?php unset($_SESSION['cat_errors']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="/index.php?page=categorias&action=process-edit">
+                    <form method="POST" action="index.php?page=categorias&action=process-edit">
                         <?= Security::csrfField() ?>
                         <input type="hidden" name="id" value="<?= $categoria['id'] ?>">
                         <div class="mb-3">
@@ -34,7 +34,7 @@
                             <textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?= Security::escape($categoria['descripcion'] ?? '') ?></textarea>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=categorias" class="btn btn-secondary">Cancelar</a>
+                            <a href="index.php?page=categorias" class="btn btn-secondary">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>

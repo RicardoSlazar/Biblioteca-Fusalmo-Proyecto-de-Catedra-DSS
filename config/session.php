@@ -76,7 +76,7 @@ class Session {
      */
     public static function requireLogin(): void {
         if (!self::isLoggedIn()) {
-            header('Location: /index.php?page=login');
+            header('Location: index.php?page=login');
             exit();
         }
     }
@@ -88,7 +88,7 @@ class Session {
         self::requireLogin();
         if (!in_array($_SESSION['user_role'], $allowedRoles, true)) {
             http_response_code(403);
-            header('Location: /index.php?page=dashboard&error=acceso_denegado');
+            header('Location: index.php?page=dashboard&error=acceso_denegado');
             exit();
         }
     }

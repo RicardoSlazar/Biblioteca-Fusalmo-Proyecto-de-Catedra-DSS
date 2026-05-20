@@ -307,7 +307,7 @@ $csrfField = Security::csrfField();
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="/index.php?page=login&action=process" novalidate>
+    <form method="POST" action="index.php?page=login&action=process" novalidate>
         <?= $csrfField ?>
 
         <div class="form-group">
@@ -351,7 +351,7 @@ $csrfField = Security::csrfField();
                 <input type="checkbox" name="recordar">
                 Recordarme
             </label>
-            <a href="/index.php?page=recuperar" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            <a href="index.php?page=recuperar" class="forgot-link">¿Olvidaste tu contraseña?</a>
         </div>
 
         <button type="submit" class="btn-primary">

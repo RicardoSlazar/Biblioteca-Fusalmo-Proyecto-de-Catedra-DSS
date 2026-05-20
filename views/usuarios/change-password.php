@@ -42,7 +42,7 @@
                     <?php endif; ?>
 
                     <!-- Formulario -->
-                    <form method="POST" action="/index.php?page=usuarios&action=process-change-password">
+                    <form method="POST" action="index.php?page=usuarios&action=process-change-password">
 
                         <?= Security::csrfField() ?>
                         <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
@@ -87,7 +87,7 @@
 
                         <!-- Botones -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=usuarios" class="btn btn-secondary">
+                            <a href="index.php?page=usuarios" class="btn btn-secondary">
                                 <i class="bi bi-x-circle"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">

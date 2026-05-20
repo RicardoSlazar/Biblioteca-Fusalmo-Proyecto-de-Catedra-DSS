@@ -44,16 +44,16 @@ class CategoriaController {
         if (!empty($errors)) {
             $_SESSION['cat_errors'] = $errors;
             $_SESSION['cat_data'] = compact('nombre', 'descripcion');
-            header('Location: /index.php?page=categorias&action=create');
+            header('Location: index.php?page=categorias&action=create');
             exit();
         }
 
         if ($this->categoriaModel->create(compact('nombre', 'descripcion'))) {
             $_SESSION['success'] = 'Categoría creada.';
-            header('Location: /index.php?page=categorias');
+            header('Location: index.php?page=categorias');
         } else {
             $_SESSION['error'] = 'Error al crear categoría.';
-            header('Location: /index.php?page=categorias&action=create');
+            header('Location: index.php?page=categorias&action=create');
         }
         exit();
     }
@@ -66,7 +66,7 @@ class CategoriaController {
         
         if (!$categoria) {
             $_SESSION['error'] = 'Categoría no encontrada.';
-            header('Location: /index.php?page=categorias');
+            header('Location: index.php?page=categorias');
             exit();
         }
 
@@ -88,16 +88,16 @@ class CategoriaController {
 
         if (!empty($errors)) {
             $_SESSION['cat_errors'] = $errors;
-            header("Location: /index.php?page=categorias&action=edit&id={$id}");
+            header("Location: index.php?page=categorias&action=edit&id={$id}");
             exit();
         }
 
         if ($this->categoriaModel->update($id, compact('nombre', 'descripcion'))) {
             $_SESSION['success'] = 'Categoría actualizada.';
-            header('Location: /index.php?page=categorias');
+            header('Location: index.php?page=categorias');
         } else {
             $_SESSION['error'] = 'Error al actualizar.';
-            header("Location: /index.php?page=categorias&action=edit&id={$id}");
+            header("Location: index.php?page=categorias&action=edit&id={$id}");
         }
         exit();
     }
@@ -120,7 +120,7 @@ class CategoriaController {
             }
         }
 
-        header('Location: /index.php?page=categorias');
+        header('Location: index.php?page=categorias');
         exit();
     }
 }

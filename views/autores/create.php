@@ -22,7 +22,7 @@
                         <?php unset($_SESSION['aut_errors']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="/index.php?page=autores&action=process-create">
+                    <form method="POST" action="index.php?page=autores&action=process-create">
                         <?= Security::csrfField() ?>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
@@ -33,7 +33,7 @@
                             <input type="text" id="nacionalidad" name="nacionalidad" class="form-control">
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=autores" class="btn btn-secondary">Cancelar</a>
+                            <a href="index.php?page=autores" class="btn btn-secondary">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>

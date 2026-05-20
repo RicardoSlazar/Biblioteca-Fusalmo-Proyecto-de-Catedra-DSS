@@ -142,29 +142,95 @@ class Libro {
         return $stmt->execute([':cantidad' => max(0, $cantidad), ':id' => $id]);
     }
 
-    /**
-     * Elimina un libro.
-     */
-    public function delete(int $id): bool {
-        $stmt = $this->db->prepare("DELETE FROM libros WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+   /**
+ * Elimina un libro.
+ */
+public function delete(int $id): bool {
+
+    // Verificar si tiene préstamos asociados
+
+    $stmt = $this->db->prepare(
+
+        "SELECT COUNT(*)
+         FROM prestamos
+         WHERE libro_id = :id"
+
+    );
+
+    $stmt->execute([
+
+        ':id' => $id
+
+    ]);
+
+    $prestamos = $stmt->fetchColumn();
+
+    if($prestamos > 0){
+
+        $_SESSION['error'] =
+        'No se puede eliminar el libro porque tiene préstamos asociados';
+
+        return false;
     }
+
+    // Si no tiene préstamos, eliminar
+
+    $stmt = $this->db->prepare(
+
+        "DELETE FROM libros
+         WHERE id = :id"
+
+    );
+
+    return $stmt->execute([
+
+        ':id' => $id
+
+    ]);
+}
 
     /**
      * Busca libros por título o ISBN.
      */
-    public function search(string $query): array {
-        $searchTerm = "%{$query}%";
-        $stmt = $this->db->prepare(
-            "SELECT l.id, l.titulo, a.nombre AS autor, c.nombre AS categoria, 
-                    l.isbn, l.cantidad, l.estado
-             FROM libros l
-             LEFT JOIN autores a ON l.autor_id = a.id
-             LEFT JOIN categorias c ON l.categoria_id = c.id
-             WHERE l.titulo LIKE :query OR l.isbn LIKE :query
-             ORDER BY l.titulo"
-        );
-        $stmt->execute([':query' => $searchTerm]);
-        return $stmt->fetchAll();
-    }
+    /**
+ * Busca libros por título o ISBN.
+ */
+public function search(string $query): array {
+
+    $searchTerm = "%{$query}%";
+
+    $stmt = $this->db->prepare(
+
+        "SELECT l.id,
+                l.titulo,
+                a.nombre AS autor,
+                c.nombre AS categoria,
+                l.isbn,
+                l.cantidad,
+                l.estado
+
+        FROM libros l
+
+        LEFT JOIN autores a
+        ON l.autor_id = a.id
+
+        LEFT JOIN categorias c
+        ON l.categoria_id = c.id
+
+        WHERE l.titulo LIKE :titulo
+        OR l.isbn LIKE :isbn
+
+        ORDER BY l.titulo"
+
+    );
+
+    $stmt->execute([
+
+        ':titulo' => $searchTerm,
+        ':isbn'   => $searchTerm
+
+    ]);
+
+    return $stmt->fetchAll();
+}
 }

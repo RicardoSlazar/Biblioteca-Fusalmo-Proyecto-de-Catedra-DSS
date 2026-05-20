@@ -39,14 +39,14 @@ class UsuarioController {
         $id = Security::sanitizeInt($_GET['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Usuario no especificado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
         $usuario = $this->usuarioModel->getById($id);
         if (!$usuario) {
             $_SESSION['error'] = 'Usuario no encontrado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
@@ -86,7 +86,7 @@ class UsuarioController {
         if (!empty($errors)) {
             $_SESSION['edit_errors'] = $errors;
             $_SESSION['edit_data'] = ['id' => $id, 'nombre' => $nombre, 'correo' => $email, 'telefono' => $telefono, 'rol' => $rol];
-            header("Location: /index.php?page=usuarios&action=edit&id={$id}");
+            header("Location: index.php?page=usuarios&action=edit&id={$id}");
             exit();
         }
 
@@ -99,10 +99,10 @@ class UsuarioController {
 
         if ($updated) {
             $_SESSION['success'] = 'Usuario actualizado correctamente.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
         } else {
             $_SESSION['error'] = 'Error al actualizar el usuario.';
-            header("Location: /index.php?page=usuarios&action=edit&id={$id}");
+            header("Location: index.php?page=usuarios&action=edit&id={$id}");
         }
         exit();
     }
@@ -118,14 +118,14 @@ class UsuarioController {
         $id = Security::sanitizeInt($_GET['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Usuario no especificado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
         $usuario = $this->usuarioModel->getById($id);
         if (!$usuario) {
             $_SESSION['error'] = 'Usuario no encontrado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
@@ -157,7 +157,7 @@ class UsuarioController {
 
         if (!empty($errors)) {
             $_SESSION['pass_errors'] = $errors;
-            header("Location: /index.php?page=usuarios&action=change-password&id={$id}");
+            header("Location: index.php?page=usuarios&action=change-password&id={$id}");
             exit();
         }
 
@@ -165,10 +165,10 @@ class UsuarioController {
 
         if ($updated) {
             $_SESSION['success'] = 'Contraseña actualizada correctamente.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
         } else {
             $_SESSION['error'] = 'Error al actualizar la contraseña.';
-            header("Location: /index.php?page=usuarios&action=change-password&id={$id}");
+            header("Location: index.php?page=usuarios&action=change-password&id={$id}");
         }
         exit();
     }
@@ -185,14 +185,14 @@ class UsuarioController {
         $id = Security::sanitizeInt($_POST['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Usuario no especificado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
         $usuario = $this->usuarioModel->getById($id);
         if (!$usuario) {
             $_SESSION['error'] = 'Usuario no encontrado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
@@ -205,7 +205,7 @@ class UsuarioController {
             $_SESSION['error'] = 'Error al cambiar el estado.';
         }
 
-        header('Location: /index.php?page=usuarios');
+        header('Location: index.php?page=usuarios');
         exit();
     }
 
@@ -221,21 +221,21 @@ class UsuarioController {
         $id = Security::sanitizeInt($_POST['id'] ?? 0);
         if (!$id) {
             $_SESSION['error'] = 'Usuario no especificado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
         $usuario = $this->usuarioModel->getById($id);
         if (!$usuario) {
             $_SESSION['error'] = 'Usuario no encontrado.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
         // Prevenir que se elimine a sí mismo
         if ($usuario['id'] == $_SESSION['user_id']) {
             $_SESSION['error'] = 'No puedes eliminar tu propia cuenta.';
-            header('Location: /index.php?page=usuarios');
+            header('Location: index.php?page=usuarios');
             exit();
         }
 
@@ -247,7 +247,7 @@ class UsuarioController {
             $_SESSION['error'] = 'Error al eliminar el usuario.';
         }
 
-        header('Location: /index.php?page=usuarios');
+        header('Location: index.php?page=usuarios');
         exit();
     }
 }

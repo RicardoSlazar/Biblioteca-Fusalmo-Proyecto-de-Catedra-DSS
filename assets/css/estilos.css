@@ -1,15 +1,214 @@
-body{
-    background-color: #f5f7fa;
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
+
+/* ===== BODY ===== */
+
+body{
+
+    background:linear-gradient(
+    135deg,
+    #f1f3f8,
+    #e8eef7);
+
+    min-height:100vh;
+
+    color:#333;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar{
+
+    background:#1E3A6E;
+
+    padding:15px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:
+    0 3px 12px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+}
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    margin-left:20px;
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+
+    opacity:.7;
+}
+
+/* ===== CONTENEDOR ===== */
+
+.container{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:30px auto;
+}
+
+/* ===== TARJETAS ===== */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+}
+
+/* ===== TÍTULOS ===== */
 
 h1,h2{
-    color: #1E3A6E;
+
+    color:#1E3A6E;
+
+    margin-bottom:20px;
 }
 
-.table{
-    background: white;
+/* ===== BOTONES ===== */
+
+.btn{
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    display:inline-block;
+
+    color:white;
+
+    font-weight:bold;
 }
 
 .btn-primary{
-    background-color: #1A4FA0;
+
+    background:#1A4FA0;
+}
+
+.btn-success{
+
+    background:#28a745;
+}
+
+.btn-danger{
+
+    background:#dc3545;
+}
+
+.btn-warning{
+
+    background:#ffc107;
+
+    color:black;
+}
+
+/* ===== INPUTS ===== */
+
+input,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    margin-top:8px;
+
+    margin-bottom:15px;
+}
+
+/* ===== TABLAS ===== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,.08);
+}
+
+table th{
+
+    background:#1E3A6E;
+
+    color:white;
+
+    padding:15px;
+}
+
+table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+}
+
+table tr:hover{
+
+    background:#f8f9fb;
+}
+
+.alert-danger{
+
+background:#f8d7da;
+color:#721c24;
+
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+
+border-left:5px solid #dc3545;
 }

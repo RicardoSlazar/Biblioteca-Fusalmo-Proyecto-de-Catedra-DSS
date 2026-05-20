@@ -59,16 +59,16 @@ class PrestamoController {
 
         if (!empty($errors)) {
             $_SESSION['prest_errors'] = $errors;
-            header('Location: /index.php?page=prestamos&action=create');
+            header('Location: index.php?page=prestamos&action=create');
             exit();
         }
 
         if ($this->prestamoModel->create(compact('usuarioId', 'libroId'))) {
             $_SESSION['success'] = 'Préstamo registrado exitosamente.';
-            header('Location: /index.php?page=prestamos');
+            header('Location: index.php?page=prestamos');
         } else {
             $_SESSION['error'] = 'Error al crear préstamo.';
-            header('Location: /index.php?page=prestamos&action=create');
+            header('Location: index.php?page=prestamos&action=create');
         }
         exit();
     }
@@ -95,7 +95,7 @@ class PrestamoController {
             }
         }
 
-        header('Location: /index.php?page=prestamos');
+        header('Location: index.php?page=prestamos');
         exit();
     }
 
@@ -114,7 +114,7 @@ class PrestamoController {
             }
         }
 
-        header('Location: /index.php?page=prestamos');
+        header('Location: index.php?page=prestamos');
         exit();
     }
 

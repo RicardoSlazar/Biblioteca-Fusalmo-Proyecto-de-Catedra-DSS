@@ -229,7 +229,7 @@ $userName  = Security::escape(Session::get('user_name') ?? '');
 
 <!-- Navbar -->
 <nav class="navbar-fusalmo">
-    <a href="/index.php?page=dashboard" class="navbar-brand-f">
+    <a href="index.php?page=dashboard" class="navbar-brand-f">
         <div class="logo-badge">F</div>
         Biblioteca Fusalmo
     </a>
@@ -237,7 +237,7 @@ $userName  = Security::escape(Session::get('user_name') ?? '');
         <i class="fas fa-user-shield" style="margin-right:6px;"></i>
         <?= $userName ?>
         &nbsp;|&nbsp;
-        <a href="/index.php?page=logout" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;">
+        <a href="index.php?page=logout" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;">
             <i class="fas fa-sign-out-alt"></i> Salir
         </a>
     </span>
@@ -247,12 +247,12 @@ $userName  = Security::escape(Session::get('user_name') ?? '');
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <a href="/index.php?page=dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="/index.php?page=libros"><i class="fas fa-book"></i> Libros</a>
-        <a href="/index.php?page=usuarios" class="active"><i class="fas fa-users"></i> Usuarios</a>
-        <a href="/index.php?page=prestamos"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
-        <a href="/index.php?page=devoluciones"><i class="fas fa-undo-alt"></i> Devoluciones</a>
-        <a href="/index.php?page=reportes"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="index.php?page=dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="index.php?page=libros"><i class="fas fa-book"></i> Libros</a>
+        <a href="index.php?page=usuarios" class="active"><i class="fas fa-users"></i> Usuarios</a>
+        <a href="index.php?page=prestamos"><i class="fas fa-hand-holding-heart"></i> Préstamos</a>
+        <a href="index.php?page=devoluciones"><i class="fas fa-undo-alt"></i> Devoluciones</a>
+        <a href="index.php?page=reportes"><i class="fas fa-chart-bar"></i> Reportes</a>
     </aside>
 
     <!-- Contenido -->
@@ -272,7 +272,7 @@ $userName  = Security::escape(Session::get('user_name') ?? '');
         <?php endif; ?>
 
         <div class="card-f">
-            <form method="POST" action="/index.php?page=register&action=process" novalidate id="regForm">
+            <form method="POST" action="index.php?page=register&action=process" novalidate id="regForm">
                 <?= $csrfField ?>
 
                 <div class="form-row" style="margin-bottom:20px;">
@@ -334,7 +334,7 @@ $userName  = Security::escape(Session::get('user_name') ?? '');
                         <i class="fas fa-user-plus" style="margin-right:7px;"></i>
                         Guardar usuario
                     </button>
-                    <a href="/index.php?page=usuarios" class="btn-f btn-cancel-f" style="text-decoration:none;display:inline-flex;align-items:center;">
+                    <a href="index.php?page=usuarios" class="btn-f btn-cancel-f" style="text-decoration:none;display:inline-flex;align-items:center;">
                         Cancelar
                     </a>
                 </div>

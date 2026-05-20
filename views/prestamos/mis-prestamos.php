@@ -65,7 +65,7 @@
         </table>
     </div>
 
-    <a href="/index.php?page=dashboard" class="btn btn-secondary">Volver</a>
+    <a href="index.php?page=dashboard" class="btn btn-secondary">Volver</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

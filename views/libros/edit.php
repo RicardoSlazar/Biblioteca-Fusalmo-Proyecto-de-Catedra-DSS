@@ -29,7 +29,7 @@
                         <?php unset($_SESSION['libro_errors']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="/index.php?page=libros&action=process-edit">
+                    <form method="POST" action="index.php?page=libros&action=process-edit">
                         <?= Security::csrfField() ?>
                         <input type="hidden" name="id" value="<?= $libro['id'] ?>">
 
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/index.php?page=libros" class="btn btn-secondary">
+                            <a href="index.php?page=libros" class="btn btn-secondary">
                                 <i class="bi bi-x-circle"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">
