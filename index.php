@@ -63,38 +63,123 @@ switch ($page) {
         break;
 
     // ── Módulos (solo autenticados) ──
+
+    // ── LIBROS ──
     case 'libros':
         Session::requireRole(['admin', 'bibliotecario']);
         require_once __DIR__ . '/controllers/LibroController.php';
         $ctrl = new LibroController();
-        $ctrl->index();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            match ($action) {
+                'process-create' => $ctrl->processCreate(),
+                'process-edit' => $ctrl->processEdit(),
+                'delete' => $ctrl->delete(),
+                default => $ctrl->index()
+            };
+        } else {
+            match ($action) {
+                'create' => $ctrl->showCreate(),
+                'edit' => $ctrl->showEdit(),
+                'search' => $ctrl->search(),
+                default => $ctrl->index()
+            };
+        }
         break;
 
-    case 'usuarios':
+    // ── CATEGORÍAS ──
+    case 'categorias':
+        Session::requireRole(['admin', 'bibliotecario']);
+        require_once __DIR__ . '/controllers/CategoriaController.php';
+        $ctrl = new CategoriaController();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            match ($action) {
+                'process-create' => $ctrl->processCreate(),
+                'process-edit' => $ctrl->processEdit(),
+                'delete' => $ctrl->delete(),
+                default => $ctrl->index()
+            };
+        } else {
+            match ($action) {
+                'create' => $ctrl->showCreate(),
+                'edit' => $ctrl->showEdit(),
+                default => $ctrl->index()
+            };
+        }
+        break;
+
+    // ── AUTORES ──
+    case 'autores':
+        Session::requireRole(['admin', 'bibliotecario']);
+        require_once __DIR__ . '/controllers/AutorController.php';
+        $ctrl = new AutorController();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            match ($action) {
+                'process-create' => $ctrl->processCreate(),
+                'process-edit' => $ctrl->processEdit(),
+                'delete' => $ctrl->delete(),
+                default => $ctrl->index()
+            };
+        } else {
+            match ($action) {
+                'create' => $ctrl->showCreate(),
+                'edit' => $ctrl->showEdit(),
+                default => $ctrl->index()
+            };
+        }
+        break;
+
+    // ── PRÉSTAMOS ──
+    case 'prestamos':
+        Session::requireRole(['admin', 'bibliotecario']);
+        require_once __DIR__ . '/controllers/PrestamoController.php';
+        $ctrl = new PrestamoController();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            match ($action) {
+                'process-create' => $ctrl->processCreate(),
+                'devolucion' => $ctrl->procesarDevolucion(),
+                'renovar' => $ctrl->renovar(),
+                default => $ctrl->index()
+            };
+        } else {
+            match ($action) {
+                'create' => $ctrl->showCreate(),
+                'vencidos' => $ctrl->vencidos(),
+                'mis-prestamos' => $ctrl->misPrestarmos(),
+                default => $ctrl->index()
+            };
+        }
+        break;
+
+    // ── USUARIOS ──
         Session::requireRole(['admin']);
         require_once __DIR__ . '/controllers/UsuarioController.php';
         $ctrl = new UsuarioController();
-        $ctrl->index();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            match ($action) {
+                'process-edit' => $ctrl->processEdit(),
+                'process-change-password' => $ctrl->processChangePassword(),
+                'toggle-status' => $ctrl->toggleStatus(),
+                'delete' => $ctrl->delete(),
+                default => $ctrl->index()
+            };
+        } else {
+            match ($action) {
+                'edit' => $ctrl->showEdit(),
+                'change-password' => $ctrl->showChangePassword(),
+                default => $ctrl->index()
+            };
+        }
         break;
 
     case 'prestamos':
         Session::requireRole(['admin', 'bibliotecario']);
         require_once __DIR__ . '/controllers/PrestamoController.php';
         $ctrl = new PrestamoController();
-        $ctrl->index();
-        break;
-
-    case 'devoluciones':
-        Session::requireRole(['admin', 'bibliotecario']);
-        require_once __DIR__ . '/controllers/DevolucionController.php';
-        $ctrl = new DevolucionController();
-        $ctrl->index();
-        break;
-
-    case 'reportes':
-        Session::requireRole(['admin']);
-        require_once __DIR__ . '/controllers/ReporteController.php';
-        $ctrl = new ReporteController();
         $ctrl->index();
         break;
 
