@@ -69,6 +69,20 @@ class Usuario {
     }
 
     /**
+     * Obtiene un usuario por ID.
+     */
+    public function getById(int $id): array|false {
+        $stmt = $this->db->prepare(
+            "SELECT id, nombre, correo, telefono, rol, estado, created_at
+             FROM usuarios
+             WHERE id = :id
+             LIMIT 1"
+        );
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch();
+    }
+
+    /**
      * Actualiza el estado de un usuario.
      */
     public function updateStatus(int $id, string $estado): bool {
@@ -79,5 +93,60 @@ class Usuario {
             "UPDATE usuarios SET estado = :estado WHERE id = :id"
         );
         return $stmt->execute([':estado' => $estado, ':id' => $id]);
+    }
+
+    /**
+     * Actualiza los datos de un usuario (admin).
+     */
+    public function update(int $id, array $data): bool {
+        $stmt = $this->db->prepare(
+            "UPDATE usuarios 
+             SET nombre = :nombre, 
+                 correo = :correo, 
+                 telefono = :telefono, 
+                 rol = :rol
+             WHERE id = :id"
+        );
+        return $stmt->execute([
+            ':id'       => $id,
+            ':nombre'   => Security::sanitizeString($data['nombre'] ?? ''),
+            ':correo'   => Security::sanitizeEmail($data['correo'] ?? ''),
+            ':telefono' => Security::sanitizeString($data['telefono'] ?? ''),
+            ':rol'      => $data['rol'] ?? 'usuario',
+        ]);
+    }
+
+    /**
+     * Actualiza la contraseña de un usuario.
+     */
+    public function updatePassword(int $id, string $password): bool {
+        $stmt = $this->db->prepare(
+            "UPDATE usuarios SET contrasena = :contrasena WHERE id = :id"
+        );
+        return $stmt->execute([
+            ':id'          => $id,
+            ':contrasena'  => Security::hashPassword($password),
+        ]);
+    }
+
+    /**
+     * Verifica si el correo existe (excluyendo un usuario específico).
+     */
+    public function emailExistsExcept(string $email, int $excludeId): bool {
+        $stmt = $this->db->prepare(
+            "SELECT COUNT(*) FROM usuarios WHERE correo = :email AND id != :id"
+        );
+        $stmt->execute([':email' => $email, ':id' => $excludeId]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    /**
+     * Elimina un usuario.
+     */
+    public function delete(int $id): bool {
+        $stmt = $this->db->prepare(
+            "DELETE FROM usuarios WHERE id = :id"
+        );
+        return $stmt->execute([':id' => $id]);
     }
 }
